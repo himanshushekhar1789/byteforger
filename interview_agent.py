@@ -277,7 +277,6 @@ The question should:
 Return only the question.
 """
 
-
 def generate_final_feedback(state):
     """
     Generate structured feedback after the minimum interview
@@ -294,27 +293,37 @@ Role:
 {state.candidate["member"]["jobRole"]}
 
 Interview conversation:
-
 {state.get_history()}
 
-Generate concise, actionable interview feedback.
+Generate concise, actionable interview feedback based only on the
+candidate's answers in the interview.
 
-Return the feedback in this exact format:
+Return ONLY valid JSON in exactly this structure:
 
-SUMMARY:
-<one concise paragraph>
+{{
+    "summary": "A concise overall assessment of the candidate.",
+    "strengths": [
+        "Strength demonstrated by the candidate.",
+        "Another strength demonstrated by the candidate."
+    ],
+    "gaps": [
+        "Specific technical gap or weakness.",
+        "Another area that could be improved."
+    ],
+    "next": [
+        "Specific recommendation for improvement.",
+        "Another concrete next step."
+    ]
+}}
 
-STRENGTHS:
-- <strength>
-- <strength>
-
-GAPS:
-- <gap>
-- <gap>
-
-NEXT:
-- <recommendation>
-- <recommendation>
+Rules:
+- Do not include markdown.
+- Do not include any explanation outside the JSON.
+- Keep the feedback concise and actionable.
+- Base the feedback on the interview conversation.
+- Do not invent skills or weaknesses that were not demonstrated.
 """
 
-    return generate_response(prompt)
+    response = generate_response(prompt)
+
+    return json.loads(response)
