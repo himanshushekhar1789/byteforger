@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/api/interview";
+const API_URL = "/api/interview";
 
 let candidates = [];
 let sessionId = null;
