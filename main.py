@@ -1,5 +1,9 @@
+
+
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from data_loader import load_candidates
 from interview_agent import start_interview, process_answer
@@ -7,6 +11,13 @@ from interview_state import get_session
 
 
 app = FastAPI(title="ByteForger Interview Agent")
+app.mount("/frontend", StaticFiles(directory="frontend"), 
+name="frontend")
+app.mount("/data", StaticFiles(directory="data"), name="data")
+
+@app.get("/app")
+def frontend():
+    return FileResponse("frontend/index.html")
 
 
 class InterviewRequest(BaseModel):
@@ -56,8 +67,8 @@ def interview(request: InterviewRequest):
         request.message
     )
 
-    # Interview may have finished and returned feedback
-    if state.has_minimum_coverage():
+    # process_answer() returns a feedback dictionary when the interview is complete
+    if state.has_minimum_coverage() and isinstance(result, dict):
         return {
             "reply": "Interview completed.",
             "done": True,

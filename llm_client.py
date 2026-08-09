@@ -15,15 +15,20 @@ if not api_key:
 client = Groq(api_key=api_key)
 
 
-def generate_response(prompt):
-    response = client.chat.completions.create(
-        model="openai/gpt-oss-120b",
-        messages=[
+def generate_response(prompt, response_format=None):
+    kwargs = {
+        "model": "openai/gpt-oss-120b",
+        "messages": [
             {
                 "role": "user",
                 "content": prompt,
-            }
+            },
         ],
-    )
+    }
+
+    if response_format:
+        kwargs["response_format"] = response_format
+
+    response = client.chat.completions.create(**kwargs)
 
     return response.choices[0].message.content.strip()

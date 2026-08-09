@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByteForger - AI Interview Agent</title>
+    <link rel="stylesheet" href="/frontend/style.css">
+</head>
+<body>
+
+    <div class="app">
+
+        <header class="header">
+            <div>
+                <h1>ByteForger</h1>
+                <p>AI-Powered Technical Interview Agent</p>
+            </div>
+            <div class="status">
+                <span class="status-dot"></span>
+                AI Ready
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <!-- Candidate Selection -->
+            <section id="candidate-section" class="card">
+                <h2>Start Your Interview</h2>
+                <p class="subtitle">
+                    Select a candidate to begin a personalized technical interview.
+                </p>
+
+                <label for="candidate-select">Candidate</label>
+
+                <select id="candidate-select">
+                    <option value="">Select a candidate...</option>
+                </select>
+
+                <div id="candidate-info" class="candidate-info hidden">
+                    <h3 id="candidate-name"></h3>
+                    <p id="candidate-role"></p>
+                    <p id="candidate-experience"></p>
+                </div>
+
+                <button id="start-btn" class="primary-btn">
+                    Start Interview
+                </button>
+            </section>
+
+            <!-- Interview Section -->
+            <section id="interview-section" class="card hidden">
+
+                <div class="interview-header">
+                    <div>
+                        <span class="label">CURRENT INTERVIEW</span>
+                        <h2 id="interview-role"></h2>
+                    </div>
+
+                    <div id="progress">
+                        Question <span id="question-number">1</span>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="ai-label">
+                        <span class="ai-icon">🤖</span>
+                        ByteForger AI
+                    </div>
+
+                    <p id="question-text">
+                        Loading question...
+                    </p>
+                </div>
+
+                <label for="answer-input">Your Answer</label>
+
+                <textarea
+                    id="answer-input"
+                    placeholder="Type your answer here..."
+                    rows="7"
+                ></textarea>
+
+                <button id="submit-btn" class="primary-btn">
+                    Submit Answer
+                </button>
+
+                <div id="loading" class="loading hidden">
+                    ByteForger is thinking...
+                </div>
+
+            </section>
+
+            
+           <!-- Feedback Section -->
+<section id="feedback-section" class="card hidden">
+
+    <div class="completion">
+        <div class="success-icon">✓</div>
+        <h2>Interview Completed</h2>
+        <p>Your personalized ByteForger performance report is ready.</p>
+    </div>
+
+    <!-- Overall Assessment -->
+    <div class="feedback-overview">
+        <div class="score-card">
+    <div class="snapshot-icon">
+        ✓
+    </div>
+
+    <div>
+        <span class="label">PERFORMANCE SNAPSHOT</span>
+        <h3 id="performance-title">
+            Strong technical foundation
+        </h3>
+
+        <p id="performance-stats">
+            Your interview performance at a glance
+        </p>
+    </div>
+</div>
+
+        <div class="feedback-block">
+            <h3>Overall Assessment</h3>
+            <p id="feedback-summary"></p>
+        </div>
+    </div>
+
+    <!-- Interactive Tabs -->
+    <div class="feedback-tabs">
+
+        <button class="feedback-tab active" data-tab="strengths">
+            ✓ Strengths
+        </button>
+
+        <button class="feedback-tab" data-tab="gaps">
+            ⚠ Areas to Improve
+        </button>
+
+        <button class="feedback-tab" data-tab="next">
+            → Next Steps
+        </button>
+
+    </div>
+
+    <!-- Strengths -->
+    <div id="tab-strengths" class="feedback-tab-content active">
+        <div id="feedback-strengths" class="feedback-cards"></div>
+    </div>
+
+    <!-- Gaps -->
+    <div id="tab-gaps" class="feedback-tab-content hidden">
+        <div id="feedback-gaps" class="feedback-cards"></div>
+    </div>
+
+    <!-- Next Steps -->
+    <div id="tab-next" class="feedback-tab-content hidden">
+        <div id="feedback-next" class="feedback-cards"></div>
+    </div>
+
+    <!-- Final Action -->
+    <div class="feedback-actions">
+        <button id="restart-btn" class="primary-btn">
+            Start New Interview
+        </button>
+    </div>
+
+</section>
+
+        </main>
+
+        <footer>
+            <p>ByteForger • Adaptive AI Interview Agent</p>
+        </footer>
+
+    </div>
+
+    <script src="/frontend/script.js"></script>
+</body>
+</html>

@@ -324,6 +324,35 @@ Rules:
 - Do not invent skills or weaknesses that were not demonstrated.
 """
 
-    response = generate_response(prompt)
+    response = generate_response(
+        prompt,
+        response_format={
+            "type": "json_schema",
+            "json_schema": {
+                "name": "interview_feedback",
+                "strict": True,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "summary": {"type": "string"},
+                        "strengths": {
+                            "type": "array",
+                            "items": {"type": "string"}
+                        },
+                        "gaps": {
+                            "type": "array",
+                            "items": {"type": "string"}
+                        },
+                        "next": {
+                            "type": "array",
+                            "items": {"type": "string"}
+                        }
+                    },
+                    "required": ["summary", "strengths", "gaps", "next"],
+                    "additionalProperties": False
+                }
+            }
+        }
+    )
 
     return json.loads(response)
